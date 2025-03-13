@@ -7,10 +7,10 @@ import os
 # Configuration
 # -------------------------------
 csv_path = '/vol/csedu-nobackup/project/mrobben/nowcasting/output/intensities_test.csv'
-output_samples_path = 'output/training_samples_by_month.npy'
-output_filenames_path = 'output/unique_filenames_by_month.npy'
+output_samples_path = 'output/training_samples_by_month_test.npy'
+output_filenames_path = 'output/unique_filenames_by_month_test.npy'
 window_size = 22            # number of consecutive frames per sample
-num_samples = 1000          # desired total number of samples for training
+num_samples = 4500          # desired total number of samples for training
 
 # Define bins based on precipitation (max_intensity)
 # Here we use exponential spacing between 0.2 and 50, then set 0 as lower and np.inf as upper edge.
@@ -46,6 +46,7 @@ def get_year_month_from_timestamp(ts):
 # -------------------------------
 # Load CSV and create valid sliding window samples
 # -------------------------------
+# df = pd.read_csv(csv_path, dtype={'timestamp': str})
 df = pd.read_csv(csv_path)
 
 # Create samples from sliding windows that do not cross month boundaries.
@@ -58,7 +59,7 @@ for i in range(len(df) - window_size + 1):
     
     # Extract timestamps from the filenames in the window.
     timestamps = [get_timestamp(fname) for fname in filenames]
-    
+
     # Get the year and month from the first timestamp.
     year, month = get_year_month_from_timestamp(timestamps[0])
     

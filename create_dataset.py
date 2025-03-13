@@ -124,9 +124,9 @@ def write_netcdf_for_shard(year, month, file_list, output_dir=".", min_intensity
     for file_path in file_list:
         timestamp, processed_image, max_intensity, mean_intensity = process_h5_file(file_path)
 
-        # If there is almost no precipitation we do not include the record
-        if mean_intensity < min_intensity:
-            continue
+        # # If there is almost no precipitation we do not include the record
+        # if mean_intensity < min_intensity:
+        #     continue
         
         timestamps.append(timestamp)
         images.append(processed_image)
@@ -175,7 +175,7 @@ def main():
     output_dir = "/vol/csedu-nobackup/project/mrobben/nowcasting/dataset/test"
 
     # Set use_unique_only = True to load the unique filenames and construct file paths accordingly.
-    use_unique_only = True
+    use_unique_only = False
     unique_filenames_by_month = None
     if use_unique_only:
         unique_filenames_path = "output/unique_filenames_by_month.npy"  # Adjust path if needed
